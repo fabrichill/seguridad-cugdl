@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUGDL Seguro | Innovación Tecnológica</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        udg: {
+                            blue: '#0B2341', // Color institucional UdeG
+                            red: '#C8102E',
+                            gold: '#F2A900',
+                            light: '#1A365D'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-pattern {
+            background-color: #0B2341;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a365d' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="bg-udg-blue text-white fixed w-full z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-shield-halved text-udg-gold text-3xl"></i>
+                    <div>
+                        <span class="font-bold text-xl tracking-wider block">CUGDL SEGURO</span>
+                        <span class="text-xs text-gray-300">Universidad de Guadalajara</span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#inicio" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Inicio</a>
+                        <a href="#proyecto" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">El Proyecto</a>
+                        <a href="#tecnologia" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Tecnología</a>
+                        <a href="#recomendaciones" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Recomendaciones</a>
+                        <a href="#emergencia" class="bg-udg-red hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-bold transition flex items-center gap-2">
+                            <i class="fa-solid fa-phone-volume"></i> Emergencias
+                        </a>
+                    </div>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-300 hover:text-white focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-udg-light pb-4 px-4">
+            <a href="#inicio" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+            <a href="#proyecto" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">El Proyecto</a>
+            <a href="#tecnologia" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Tecnología</a>
+            <a href="#recomendaciones" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Recomendaciones</a>
+            <a href="#emergencia" class="block bg-udg-red text-center mt-4 hover:bg-red-700 text-white px-3 py-2 rounded-md text-base font-bold">Emergencias</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero-pattern pt-32 pb-20 md:pt-40 md:pb-28 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+                Un Campus Inteligente, <br>
+                <span class="text-udg-gold">Una Comunidad Segura.</span>
+            </h1>
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
+                Iniciativa impulsada por estudiantes de Innovación Tecnológica para proteger a alumnos, profesores, administrativos y visitantes del Centro Universitario de Guadalajara.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#proyecto" class="bg-white text-udg-blue hover:bg-gray-100 px-8 py-3 rounded-full font-bold text-lg transition shadow-lg">
+                    Conoce la iniciativa
+                </a>
+                <a href="#recomendaciones" class="border-2 border-udg-gold text-udg-gold hover:bg-udg-gold hover:text-udg-blue px-8 py-3 rounded-full font-bold text-lg transition shadow-lg">
+                    Tips de Seguridad
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ¿Qué estamos haciendo? Section -->
+    <section id="proyecto" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">¿Qué estamos haciendo?</h2>
+                <div class="w-24 h-1 bg-udg-gold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
+                    Como proyecto de emprendimiento de la materia de <strong>Innovación Tecnológica</strong>, estamos transformando el CUGDL mediante la implementación de tecnología de punta enfocada en la prevención y respuesta rápida.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-udg-blue">Monitoreo Preventivo</h3>
+                    <p class="text-gray-600">
+                        Evaluación constante de las áreas comunes del campus para identificar riesgos antes de que se conviertan en incidentes.
+                    </p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-udg-blue">Para toda la comunidad</h3>
+                    <p class="text-gray-600">
+                        Un sistema diseñado pensando en la tranquilidad de padres de familia, alumnos, trabajadores administrativos y académicos.
+                    </p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
+                        <i class="fa-solid fa-rocket"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-udg-blue">Emprendimiento Estudiantil</h3>
+                    <p class="text-gray-600">
+                        Soluciones creadas por leones negros para leones negros, aplicando el conocimiento del aula en problemas reales de nuestro entorno.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnología Section -->
+    <section id="tecnologia" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">Campus con Seguridad Inteligente</h2>
+                    <div class="w-24 h-1 bg-udg-gold mb-6 rounded"></div>
+                    <p class="text-lg text-gray-600 mb-8">
+                        Nuestro ecosistema integra software y hardware para crear un escudo protector alrededor de nuestra comunidad universitaria.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-camera-retro text-2xl text-udg-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">Computer Vision</h4>
+                                <p class="text-gray-600">Cámaras inteligentes equipadas con algoritmos de visión por computadora capaces de detectar anomalías, reconocer placas de vehículos no autorizados y alertar sobre aglomeraciones inusuales.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-walkie-talkie text-2xl text-udg-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">Conexión Policial Directa</h4>
+                                <p class="text-gray-600">Sistema de comunicación encriptada y en tiempo real con la policía local de Guadalajara y servicios de emergencia médicas, reduciendo el tiempo de respuesta en un 40%.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-mobile-screen text-2xl text-udg-blue"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800">Botones de Pánico Virtuales</h4>
+                                <p class="text-gray-600">Integración con los dispositivos móviles de los estudiantes y personal para emitir alertas geolocalizadas silenciosas en caso de riesgo dentro y en las periferias del campus.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <!-- Placeholder visual representativo de IA/Cámaras -->
+                    <div class="bg-udg-blue rounded-2xl p-2 shadow-2xl relative overflow-hidden h-96 flex items-center justify-center">
+                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#F2A900 1px, transparent 1px); background-size: 20px 20px;"></div>
+                        
+                        <div class="relative z-10 text-center">
+                            <div class="w-32 h-32 border-4 border-udg-gold rounded-full flex items-center justify-center mx-auto mb-6 relative animate-pulse">
+                                <i class="fa-solid fa-crosshairs text-5xl text-udg-gold"></i>
+                                <!-- Scanning line animation -->
+                                <div class="absolute top-0 left-0 w-full h-1 bg-white opacity-50 animate-[scan_2s_ease-in-out_infinite]"></div>
+                            </div>
+                            <span class="bg-green-500/20 text-green-400 border border-green-500 px-4 py-1 rounded-full font-mono text-sm tracking-widest">
+                                SISTEMA ACTIVO - ANALIZANDO ENTORNOS
+                            </span>
+                        </div>
+                    </div>
+                    <style>
+                        @keyframes scan {
+                            0% { top: 0; }
+                            50% { top: 100%; }
+                            100% { top: 0; }
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recomendaciones Section -->
+    <section id="recomendaciones" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">Cultura de Prevención</h2>
+                <div class="w-24 h-1 bg-udg-gold mx-auto rounded"></div>
+                <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+                    La tecnología es nuestra herramienta, pero tu prevención es la primera línea de defensa. Sigue estas recomendaciones en el campus.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Tip 1 -->
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg transition">
+                    <i class="fa-solid fa-bag-shopping text-3xl text-udg-blue mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">Pertenencias a la vista</h4>
+                    <p class="text-sm text-gray-600">Nunca descuides tu mochila, laptop o celular en áreas comunes, biblioteca o cafetería, incluso "por un minutito".</p>
+                </div>
+                <!-- Tip 2 -->
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-gold hover:shadow-lg transition">
+                    <i class="fa-solid fa-moon text-3xl text-udg-gold mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">Horarios Nocturnos</h4>
+                    <p class="text-sm text-gray-600">Si sales tarde de clases, procura caminar en grupo hacia las paradas de transporte público o estacionamiento usando rutas iluminadas.</p>
+                </div>
+                <!-- Tip 3 -->
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg transition">
+                    <i class="fa-solid fa-id-badge text-3xl text-udg-blue mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">Identificación</h4>
+                    <p class="text-sm text-gray-600">Porta siempre tu credencial de la UdeG visible. Nos ayuda a los filtros de seguridad a identificar quién pertenece a la comunidad.</p>
+                </div>
+                <!-- Tip 4 -->
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-gold hover:shadow-lg transition">
+                    <i class="fa-solid fa-triangle-exclamation text-3xl text-udg-gold mb-4"></i>
+                    <h4 class="font-bold text-lg mb-2">Reporta anomalías</h4>
+                    <p class="text-sm text-gray-600">Si notas personas sospechosas o situaciones extrañas, no lo ignores. Acércate a la caseta de vigilancia o usa nuestros canales de reporte.</p>
+                </div>
+            </div>
+
+            <div class="mt-12 bg-blue-50 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between border border-blue-100">
+                <div class="mb-6 md:mb-0">
+                    <h4 class="text-xl font-bold text-udg-blue">¿Padre de familia o visitante?</h4>
+                    <p class="text-gray-600 mt-2">Para ingresar al campus requerimos registro previo en caseta con una identificación oficial. Agradecemos su comprensión.</p>
+                </div>
+                <i class="fa-solid fa-clipboard-user text-5xl text-blue-200"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section id="emergencia" class="py-16 bg-udg-red text-white text-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <i class="fa-solid fa-triangle-exclamation text-5xl mb-6"></i>
+            <h2 class="text-3xl md:text-5xl font-bold mb-6">Directorio de Emergencias</h2>
+            <p class="text-lg mb-10 text-red-100">En caso de una emergencia real dentro o en las inmediaciones del CUGDL, utiliza los siguientes botones para llamar de inmediato.</p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="tel:911" class="bg-white text-udg-red hover:bg-gray-100 px-8 py-4 rounded-xl font-black text-2xl transition shadow-xl flex items-center justify-center gap-3">
+                    <i class="fa-solid fa-phone"></i> 911 <span class="text-sm font-normal block ml-2 border-l pl-2 border-gray-300">Policía / Médica</span>
+                </a>
+                <a href="#" onclick="alert('Funcionalidad de llamada a Seguridad CUGDL activa. Número de ejemplo.'); return false;" class="bg-black text-white hover:bg-gray-900 px-8 py-4 rounded-xl font-bold text-xl transition shadow-xl flex items-center justify-center gap-3 border border-gray-700">
+                    <i class="fa-solid fa-walkie-talkie"></i> Seguridad CUGDL
+                </a>
+            </div>
+            <p class="mt-8 text-sm text-red-200">
+                * El uso indebido de los números de emergencia está penado por la ley. Úsalos con responsabilidad.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-udg-blue text-gray-300 py-12 border-t-4 border-udg-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fa-solid fa-shield-halved text-udg-gold text-2xl"></i>
+                        <span class="font-bold text-xl text-white tracking-wider">CUGDL SEGURO</span>
+                    </div>
+                    <p class="text-sm mb-4">
+                        Un proyecto estudiantil de la materia de Innovación Tecnológica, comprometido con el bienestar de la red universitaria.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Enlaces Rápidos</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#inicio" class="hover:text-udg-gold transition">Inicio</a></li>
+                        <li><a href="#proyecto" class="hover:text-udg-gold transition">Sobre el Proyecto</a></li>
+                        <li><a href="#tecnologia" class="hover:text-udg-gold transition">Innovación</a></li>
+                        <li><a href="#recomendaciones" class="hover:text-udg-gold transition">Tips de Seguridad</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold mb-4">Centro Universitario</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><i class="fa-solid fa-location-dot w-5 text-udg-gold"></i> CUGDL, Guadalajara, Jalisco</li>
+                        <li><i class="fa-solid fa-envelope w-5 text-udg-gold"></i> innovacion@cugdl.udg.mx</li>
+                        <li><i class="fa-solid fa-graduation-cap w-5 text-udg-gold"></i> Universidad de Guadalajara</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm flex flex-col md:flex-row justify-between items-center">
+                <p>&copy; 2026 CUGDL Seguro - Proyecto Académico de Emprendimiento.</p>
+                <div class="mt-4 md:mt-0 space-x-4">
+                    <span class="text-gray-500">Hecho con <i class="fa-solid fa-heart text-udg-red"></i> por estudiantes UdeG</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Smooth scrolling for anchor links (fallback para navegadores que no soportan scroll-behavior)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

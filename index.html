@@ -19,10 +19,10 @@
                     },
                     colors: {
                         udg: {
-                            blue: '#0B2341', // Color institucional UdeG
-                            red: '#C8102E',
-                            gold: '#F2A900',
-                            light: '#1A365D'
+                            blue: '#0f172a', // Color institucional (Más oscuro y serio - Slate 900)
+                            red: '#dc2626',  // Rojo emergencia
+                            accent: '#64748b', // Tono tecnológico (Slate 500) en lugar de dorado
+                            light: '#1e293b' // Slate 800
                         }
                     }
                 }
@@ -31,19 +31,43 @@
     </script>
     <style>
         .hero-pattern {
-            background-color: #0B2341;
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a365d' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background-color: #0f172a;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e293b' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Nuevas clases para animaciones de Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        @keyframes ringing {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(15deg); }
+            50% { transform: rotate(-15deg); }
+            75% { transform: rotate(10deg); }
+        }
+        .animate-ringing {
+            animation: ringing 0.5s ease-in-out infinite;
         }
     </style>
 </head>
-<body class="font-sans text-gray-800 bg-gray-50">
+<body class="font-sans text-gray-800 bg-gray-50 overflow-x-hidden">
 
     <!-- Navbar -->
-    <nav class="bg-udg-blue text-white fixed w-full z-50 shadow-lg">
+    <nav id="navbar" class="bg-udg-blue text-white fixed w-full z-50 shadow-lg transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <i class="fa-solid fa-shield-halved text-udg-gold text-3xl"></i>
+            <div id="navbar-container" class="flex items-center justify-between h-20 transition-all duration-300">
+                <div class="flex items-center gap-3 group cursor-default">
+                    <i class="fa-solid fa-shield-halved text-udg-accent text-3xl group-hover:rotate-12 transition-transform duration-300"></i>
                     <div>
                         <span class="font-bold text-xl tracking-wider block">CUGDL SEGURO</span>
                         <span class="text-xs text-gray-300">Universidad de Guadalajara</span>
@@ -51,10 +75,10 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-6">
-                        <a href="#inicio" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Inicio</a>
-                        <a href="#proyecto" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">El Proyecto</a>
-                        <a href="#tecnologia" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Tecnología</a>
-                        <a href="#recomendaciones" class="hover:text-udg-gold px-3 py-2 rounded-md text-sm font-medium transition">Recomendaciones</a>
+                        <a href="#inicio" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Inicio</a>
+                        <a href="#proyecto" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">El Proyecto</a>
+                        <a href="#tecnologia" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Tecnología</a>
+                        <a href="#recomendaciones" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition">Recomendaciones</a>
                         <a href="#emergencia" class="bg-udg-red hover:bg-red-700 text-white px-4 py-2 rounded-md text-sm font-bold transition flex items-center gap-2">
                             <i class="fa-solid fa-phone-volume"></i> Emergencias
                         </a>
@@ -69,69 +93,72 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-udg-light pb-4 px-4">
-            <a href="#inicio" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Inicio</a>
-            <a href="#proyecto" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">El Proyecto</a>
-            <a href="#tecnologia" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Tecnología</a>
-            <a href="#recomendaciones" class="block hover:text-udg-gold px-3 py-2 rounded-md text-base font-medium">Recomendaciones</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-udg-light pb-4 px-4 border-t border-gray-700">
+            <a href="#inicio" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Inicio</a>
+            <a href="#proyecto" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">El Proyecto</a>
+            <a href="#tecnologia" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Tecnología</a>
+            <a href="#recomendaciones" class="block text-gray-300 hover:text-white px-3 py-2 rounded-md text-base font-medium">Recomendaciones</a>
             <a href="#emergencia" class="block bg-udg-red text-center mt-4 hover:bg-red-700 text-white px-3 py-2 rounded-md text-base font-bold">Emergencias</a>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero-pattern pt-32 pb-20 md:pt-40 md:pb-28 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+    <section id="inicio" class="hero-pattern pt-32 pb-20 md:pt-40 md:pb-28 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 reveal">
                 Un Campus Inteligente, <br>
-                <span class="text-udg-gold">Una Comunidad Segura.</span>
+                <span class="text-gray-300 inline-block hover:scale-105 transition-transform duration-300">Una Comunidad Segura.</span>
             </h1>
-            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-300 mb-10">
+            <p class="mt-4 max-w-2xl mx-auto text-xl text-gray-400 mb-10 reveal delay-100">
                 Iniciativa impulsada por estudiantes de Innovación Tecnológica para proteger a alumnos, profesores, administrativos y visitantes del Centro Universitario de Guadalajara.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#proyecto" class="bg-white text-udg-blue hover:bg-gray-100 px-8 py-3 rounded-full font-bold text-lg transition shadow-lg">
+            <div class="flex flex-col sm:flex-row justify-center gap-4 reveal delay-200">
+                <a href="#proyecto" class="bg-white text-udg-blue hover:bg-gray-200 px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,0.2)] hover:-translate-y-1 active:scale-95">
                     Conoce la iniciativa
                 </a>
-                <a href="#recomendaciones" class="border-2 border-udg-gold text-udg-gold hover:bg-udg-gold hover:text-udg-blue px-8 py-3 rounded-full font-bold text-lg transition shadow-lg">
+                <a href="#recomendaciones" class="border-2 border-udg-accent text-udg-accent hover:bg-udg-accent hover:text-white px-8 py-3 rounded-full font-bold text-lg transition-all duration-300 hover:shadow-[0_0_15px_rgba(100,116,139,0.4)] hover:-translate-y-1 active:scale-95">
                     Tips de Seguridad
                 </a>
             </div>
         </div>
+        <!-- Elementos decorativos flotantes -->
+        <div class="absolute top-20 left-10 w-24 h-24 bg-udg-accent/10 rounded-full blur-xl animate-pulse"></div>
+        <div class="absolute bottom-10 right-20 w-40 h-40 bg-gray-500/10 rounded-full blur-2xl animate-pulse" style="animation-delay: 1s;"></div>
     </section>
 
     <!-- ¿Qué estamos haciendo? Section -->
     <section id="proyecto" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">¿Qué estamos haciendo?</h2>
-                <div class="w-24 h-1 bg-udg-gold mx-auto rounded"></div>
+                <div class="w-24 h-1 bg-udg-accent mx-auto rounded transition-all duration-500 hover:w-32"></div>
                 <p class="mt-6 text-lg text-gray-600 max-w-3xl mx-auto">
                     Como proyecto de emprendimiento de la materia de <strong>Innovación Tecnológica</strong>, estamos transformando el CUGDL mediante la implementación de tecnología de punta enfocada en la prevención y respuesta rápida.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
-                        <i class="fa-solid fa-eye"></i>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal delay-100">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl group-hover:bg-udg-blue group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-eye group-hover:scale-110 transition-transform duration-300"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-udg-blue">Monitoreo Preventivo</h3>
                     <p class="text-gray-600">
                         Evaluación constante de las áreas comunes del campus para identificar riesgos antes de que se conviertan en incidentes.
                     </p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
-                        <i class="fa-solid fa-users"></i>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal delay-200">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl group-hover:bg-udg-blue group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-users group-hover:scale-110 transition-transform duration-300"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-udg-blue">Para toda la comunidad</h3>
                     <p class="text-gray-600">
                         Un sistema diseñado pensando en la tranquilidad de padres de familia, alumnos, trabajadores administrativos y académicos.
                     </p>
                 </div>
-                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-md transition">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl">
-                        <i class="fa-solid fa-rocket"></i>
+                <div class="bg-gray-50 rounded-xl p-8 shadow-sm border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group reveal delay-300">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mb-6 text-udg-blue text-2xl group-hover:bg-udg-blue group-hover:text-white transition-colors duration-300">
+                        <i class="fa-solid fa-rocket group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300"></i>
                     </div>
                     <h3 class="text-xl font-bold mb-3 text-udg-blue">Emprendimiento Estudiantil</h3>
                     <p class="text-gray-600">
@@ -146,66 +173,162 @@
     <section id="tecnologia" class="py-20 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row items-center gap-12">
-                <div class="lg:w-1/2">
+                <div class="lg:w-1/2 reveal">
                     <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">Campus con Seguridad Inteligente</h2>
-                    <div class="w-24 h-1 bg-udg-gold mb-6 rounded"></div>
+                    <div class="w-24 h-1 bg-udg-accent mb-6 rounded transition-all duration-500 hover:w-32"></div>
                     <p class="text-lg text-gray-600 mb-8">
                         Nuestro ecosistema integra software y hardware para crear un escudo protector alrededor de nuestra comunidad universitaria.
                     </p>
                     
                     <div class="space-y-6">
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 group hover:bg-white p-3 -ml-3 rounded-lg transition-colors duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fa-solid fa-camera-retro text-2xl text-udg-blue"></i>
+                                <i class="fa-solid fa-camera-retro text-2xl text-udg-accent group-hover:text-udg-blue transition-colors duration-300"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-gray-800">Computer Vision</h4>
+                                <h4 class="text-xl font-bold text-gray-800 group-hover:text-udg-blue transition-colors">Computer Vision</h4>
                                 <p class="text-gray-600">Cámaras inteligentes equipadas con algoritmos de visión por computadora capaces de detectar anomalías, reconocer placas de vehículos no autorizados y alertar sobre aglomeraciones inusuales.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 group hover:bg-white p-3 -ml-3 rounded-lg transition-colors duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fa-solid fa-walkie-talkie text-2xl text-udg-blue"></i>
+                                <i class="fa-solid fa-walkie-talkie text-2xl text-udg-accent group-hover:text-udg-blue transition-colors duration-300"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-gray-800">Conexión Policial Directa</h4>
+                                <h4 class="text-xl font-bold text-gray-800 group-hover:text-udg-blue transition-colors">Conexión Policial Directa</h4>
                                 <p class="text-gray-600">Sistema de comunicación encriptada y en tiempo real con la policía local de Guadalajara y servicios de emergencia médicas, reduciendo el tiempo de respuesta en un 40%.</p>
                             </div>
                         </div>
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 group hover:bg-white p-3 -ml-3 rounded-lg transition-colors duration-300">
                             <div class="flex-shrink-0 mt-1">
-                                <i class="fa-solid fa-mobile-screen text-2xl text-udg-blue"></i>
+                                <i class="fa-solid fa-mobile-screen text-2xl text-udg-accent group-hover:text-udg-blue transition-colors duration-300"></i>
                             </div>
                             <div>
-                                <h4 class="text-xl font-bold text-gray-800">Botones de Pánico Virtuales</h4>
+                                <h4 class="text-xl font-bold text-gray-800 group-hover:text-udg-blue transition-colors">Botones de Pánico Virtuales</h4>
                                 <p class="text-gray-600">Integración con los dispositivos móviles de los estudiantes y personal para emitir alertas geolocalizadas silenciosas en caso de riesgo dentro y en las periferias del campus.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 group hover:bg-white p-3 -ml-3 rounded-lg transition-colors duration-300">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-helicopter text-2xl text-udg-accent group-hover:text-udg-blue transition-colors duration-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800 group-hover:text-udg-blue transition-colors">Patrullaje con Drones</h4>
+                                <p class="text-gray-600">Implementación de drones que están inspeccionando la zona desde el aire de forma constante, accediendo a puntos ciegos y ofreciendo una vista panorámica al Centro de Mando.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 group hover:bg-white p-3 -ml-3 rounded-lg transition-colors duration-300">
+                            <div class="flex-shrink-0 mt-1">
+                                <i class="fa-solid fa-fingerprint text-2xl text-udg-accent group-hover:text-udg-blue transition-colors duration-300"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold text-gray-800 group-hover:text-udg-blue transition-colors">Accesos Inteligentes y Biométricos</h4>
+                                <p class="text-gray-600">En todas las entradas de la universidad podrás usar reconocimiento facial o de huellas, pasar tu credencial de estudiante por un lector, o gracias a sensores de proximidad, simplemente tenerla en tu bolsa y automáticamente se abrirán las puertas para ti.</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="lg:w-1/2 relative">
-                    <!-- Placeholder visual representativo de IA/Cámaras -->
-                    <div class="bg-udg-blue rounded-2xl p-2 shadow-2xl relative overflow-hidden h-96 flex items-center justify-center">
-                        <div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#F2A900 1px, transparent 1px); background-size: 20px 20px;"></div>
-                        
-                        <div class="relative z-10 text-center">
-                            <div class="w-32 h-32 border-4 border-udg-gold rounded-full flex items-center justify-center mx-auto mb-6 relative animate-pulse">
-                                <i class="fa-solid fa-crosshairs text-5xl text-udg-gold"></i>
-                                <!-- Scanning line animation -->
-                                <div class="absolute top-0 left-0 w-full h-1 bg-white opacity-50 animate-[scan_2s_ease-in-out_infinite]"></div>
+                <div class="lg:w-1/2 relative w-full reveal delay-200">
+                    <!-- Dashboard Visual Mockup -->
+                    <div class="bg-[#0b1120] rounded-2xl border border-gray-700 shadow-[0_20px_50px_rgba(0,0,0,0.5)] overflow-hidden flex flex-col group transform hover:scale-[1.02] transition-transform duration-500">
+                        <!-- Dashboard Header (Estilo macOS/Ventana) -->
+                        <div class="bg-gray-800/80 px-4 py-3 border-b border-gray-700 flex justify-between items-center">
+                            <div class="flex items-center gap-2">
+                                <div class="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_5px_rgba(234,179,8,0.5)]"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.5)]"></div>
                             </div>
-                            <span class="bg-green-500/20 text-green-400 border border-green-500 px-4 py-1 rounded-full font-mono text-sm tracking-widest">
-                                SISTEMA ACTIVO - ANALIZANDO ENTORNOS
-                            </span>
+                            <span class="text-xs text-gray-400 font-mono tracking-widest">CUGDL_OS v2.4 • CENTRO DE MANDO</span>
+                        </div>
+                        
+                        <!-- Dashboard Content -->
+                        <div class="p-4 grid grid-cols-2 gap-4 h-96 relative">
+                            <!-- 1. Computer Vision Camera Feed -->
+                            <div class="col-span-2 md:col-span-1 bg-black rounded-xl border border-gray-700 relative overflow-hidden shadow-inner">
+                                <!-- Filtro visual para simular cámara de seguridad -->
+                                <div class="absolute inset-0 bg-blue-900/20 mix-blend-color z-10 pointer-events-none"></div>
+                                <!-- Nueva imagen de vista aérea de dron analizando peatones -->
+                                <img src="https://images.unsplash.com/photo-1495315082126-72fa998a6eb7?auto=format&fit=crop&w=600&q=80" alt="Vista Aérea Dron y Análisis IA" class="w-full h-full object-cover opacity-70 grayscale group-hover:grayscale-0 transition-all duration-700">
+                                
+                                <!-- Overlay IA Bounding Boxes y Escáner -->
+                                <div class="absolute inset-0 p-2 z-20 pointer-events-none">
+                                    <!-- Caja 1: Biometría -->
+                                    <div class="border-2 border-green-500 w-12 h-20 absolute top-8 left-12 shadow-[0_0_8px_rgba(34,197,94,0.8)]">
+                                        <div class="absolute -top-4 left-0 text-[6px] bg-green-500 text-black px-1 font-bold whitespace-nowrap">ID BIOMÉTRICA OK</div>
+                                    </div>
+                                    <!-- Caja 2: Detección Dron -->
+                                    <div class="border-2 border-yellow-400 w-24 h-24 absolute bottom-12 right-6 shadow-[0_0_8px_rgba(250,204,21,0.5)] rounded-full border-dashed animate-[spin_10s_linear_infinite]"></div>
+                                    <div class="absolute bottom-32 right-8 text-[6px] bg-yellow-400 text-black px-1 font-bold whitespace-nowrap">ANÁLISIS PERIMETRAL</div>
+                                    
+                                    <!-- Línea láser de escaneo -->
+                                    <div class="absolute top-0 left-0 w-full h-[2px] bg-blue-400/70 shadow-[0_0_15px_rgba(96,165,250,1)] animate-[scan_3s_ease-in-out_infinite]"></div>
+                                </div>
+                                <!-- UI de la cámara -->
+                                <div class="absolute bottom-2 left-2 z-20 flex gap-2 items-center bg-black/60 px-2 py-1 rounded backdrop-blur-sm border border-gray-700">
+                                    <span class="animate-pulse w-2 h-2 bg-red-500 rounded-full shadow-[0_0_5px_red]"></span>
+                                    <span class="text-[9px] text-white font-mono">REC • FEED DRON-04 AÉREO</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. Panic Button Alerts -->
+                            <div class="col-span-2 md:col-span-1 bg-gray-800/50 rounded-xl border border-gray-700 p-3 flex flex-col gap-2 backdrop-blur-md">
+                                <h5 class="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-1 border-b border-gray-700 pb-1 flex items-center justify-between">
+                                    Alertas Activas <i class="fa-solid fa-satellite-dish text-gray-500"></i>
+                                </h5>
+                                <!-- Alerta Roja -->
+                                <div class="bg-red-500/10 border border-red-500/30 rounded-lg p-2 flex items-start gap-2 animate-[pulse_2s_ease-in-out_infinite]">
+                                    <i class="fa-solid fa-bell text-red-500 text-xs mt-1 animate-ringing"></i>
+                                    <div>
+                                        <p class="text-xs text-white font-bold leading-tight">Pánico Activado</p>
+                                        <p class="text-[9px] text-red-300 mt-0.5"><i class="fa-solid fa-location-dot"></i> Estacionamiento Norte • Hace 12s</p>
+                                    </div>
+                                </div>
+                                <!-- Alerta Amarilla -->
+                                <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-2 flex items-start gap-2 opacity-75">
+                                    <i class="fa-solid fa-triangle-exclamation text-yellow-500 text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs text-gray-200 font-bold leading-tight">Aglomeración Inusual</p>
+                                        <p class="text-[9px] text-gray-400 mt-0.5"><i class="fa-solid fa-location-dot"></i> Cafetería Central • Hace 4m</p>
+                                    </div>
+                                </div>
+                                <!-- Alerta Dron -->
+                                <div class="bg-blue-500/10 border border-blue-500/30 rounded-lg p-2 flex items-start gap-2 opacity-80 animate-pulse">
+                                    <i class="fa-solid fa-helicopter text-blue-400 text-xs mt-1"></i>
+                                    <div>
+                                        <p class="text-xs text-blue-200 font-bold leading-tight">Dron DR-04 en Vuelo</p>
+                                        <p class="text-[9px] text-blue-400 mt-0.5"><i class="fa-solid fa-eye"></i> Inspeccionando la zona • En curso</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 3. Police Connection -->
+                            <div class="col-span-2 bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl border border-gray-700 p-4 flex justify-between items-center relative overflow-hidden shadow-lg mt-2">
+                                <!-- Efecto de luz de fondo -->
+                                <div class="absolute right-0 top-0 w-32 h-32 bg-blue-500/10 rounded-full blur-2xl"></div>
+                                <div class="absolute left-10 bottom-0 w-24 h-24 bg-green-500/10 rounded-full blur-2xl"></div>
+                                
+                                <div class="flex items-center gap-4 relative z-10">
+                                    <div class="w-12 h-12 rounded-full bg-blue-900/50 flex items-center justify-center border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.3)]">
+                                        <i class="fa-solid fa-shield text-blue-400 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-white font-bold tracking-wide">C5 GDL / Policía Zapopan</p>
+                                        <p class="text-xs text-green-400 flex items-center gap-1.5 mt-0.5 font-mono">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block animate-pulse shadow-[0_0_5px_rgba(34,197,94,0.8)]"></span>
+                                            ENLACE DIRECTO CIFRADO ACTIVO
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="relative z-10 text-right hidden sm:block">
+                                    <p class="text-[10px] text-gray-400 font-mono"><i class="fa-solid fa-satellite text-[8px] text-gray-500 mr-1"></i> LAT: 20.6596° N</p>
+                                    <p class="text-[10px] text-gray-400 font-mono ml-3">LON: -103.3496° W</p>
+                                    <div class="mt-1 h-1 w-full bg-gray-700 rounded-full overflow-hidden">
+                                        <div class="h-full bg-green-500 w-full animate-[pulse_3s_ease-in-out_infinite]"></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <style>
-                        @keyframes scan {
-                            0% { top: 0; }
-                            50% { top: 100%; }
-                            100% { top: 0; }
-                        }
-                    </style>
                 </div>
             </div>
         </div>
@@ -214,9 +337,9 @@
     <!-- Recomendaciones Section -->
     <section id="recomendaciones" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 reveal">
                 <h2 class="text-3xl md:text-4xl font-bold text-udg-blue mb-4">Cultura de Prevención</h2>
-                <div class="w-24 h-1 bg-udg-gold mx-auto rounded"></div>
+                <div class="w-24 h-1 bg-udg-accent mx-auto rounded transition-all duration-500 hover:w-32"></div>
                 <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
                     La tecnología es nuestra herramienta, pero tu prevención es la primera línea de defensa. Sigue estas recomendaciones en el campus.
                 </p>
@@ -224,54 +347,55 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Tip 1 -->
-                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg transition">
-                    <i class="fa-solid fa-bag-shopping text-3xl text-udg-blue mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">Pertenencias a la vista</h4>
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal delay-100">
+                    <i class="fa-solid fa-bag-shopping text-3xl text-udg-blue mb-4 group-hover:rotate-12 transition-transform duration-300"></i>
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-udg-blue transition-colors">Pertenencias a la vista</h4>
                     <p class="text-sm text-gray-600">Nunca descuides tu mochila, laptop o celular en áreas comunes, biblioteca o cafetería, incluso "por un minutito".</p>
                 </div>
                 <!-- Tip 2 -->
-                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-gold hover:shadow-lg transition">
-                    <i class="fa-solid fa-moon text-3xl text-udg-gold mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">Horarios Nocturnos</h4>
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-accent hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal delay-200">
+                    <i class="fa-solid fa-moon text-3xl text-udg-accent mb-4 group-hover:-rotate-12 transition-transform duration-300"></i>
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-udg-blue transition-colors">Horarios Nocturnos</h4>
                     <p class="text-sm text-gray-600">Si sales tarde de clases, procura caminar en grupo hacia las paradas de transporte público o estacionamiento usando rutas iluminadas.</p>
                 </div>
                 <!-- Tip 3 -->
-                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg transition">
-                    <i class="fa-solid fa-id-badge text-3xl text-udg-blue mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">Identificación</h4>
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-blue hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal delay-300">
+                    <i class="fa-solid fa-id-badge text-3xl text-udg-blue mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-udg-blue transition-colors">Identificación</h4>
                     <p class="text-sm text-gray-600">Porta siempre tu credencial de la UdeG visible. Nos ayuda a los filtros de seguridad a identificar quién pertenece a la comunidad.</p>
                 </div>
                 <!-- Tip 4 -->
-                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-gold hover:shadow-lg transition">
-                    <i class="fa-solid fa-triangle-exclamation text-3xl text-udg-gold mb-4"></i>
-                    <h4 class="font-bold text-lg mb-2">Reporta anomalías</h4>
+                <div class="bg-gray-50 rounded-lg p-6 border-l-4 border-udg-accent hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group reveal delay-100">
+                    <i class="fa-solid fa-triangle-exclamation text-3xl text-udg-accent mb-4 group-hover:animate-pulse"></i>
+                    <h4 class="font-bold text-lg mb-2 group-hover:text-udg-blue transition-colors">Reporta anomalías</h4>
                     <p class="text-sm text-gray-600">Si notas personas sospechosas o situaciones extrañas, no lo ignores. Acércate a la caseta de vigilancia o usa nuestros canales de reporte.</p>
                 </div>
             </div>
 
-            <div class="mt-12 bg-blue-50 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between border border-blue-100">
+            <div class="mt-12 bg-blue-50 rounded-2xl p-8 flex flex-col md:flex-row items-center justify-between border border-blue-100 hover:shadow-lg transition-shadow duration-300 group reveal delay-200">
                 <div class="mb-6 md:mb-0">
                     <h4 class="text-xl font-bold text-udg-blue">¿Padre de familia o visitante?</h4>
                     <p class="text-gray-600 mt-2">Para ingresar al campus requerimos registro previo en caseta con una identificación oficial. Agradecemos su comprensión.</p>
                 </div>
-                <i class="fa-solid fa-clipboard-user text-5xl text-blue-200"></i>
+                <i class="fa-solid fa-clipboard-user text-5xl text-blue-200 group-hover:text-blue-400 group-hover:scale-110 transition-all duration-300"></i>
             </div>
         </div>
     </section>
 
     <!-- Emergency Section -->
-    <section id="emergencia" class="py-16 bg-udg-red text-white text-center">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <i class="fa-solid fa-triangle-exclamation text-5xl mb-6"></i>
+    <section id="emergencia" class="py-16 bg-udg-red text-white text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/10"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 reveal">
+            <i class="fa-solid fa-triangle-exclamation text-5xl mb-6 animate-pulse"></i>
             <h2 class="text-3xl md:text-5xl font-bold mb-6">Directorio de Emergencias</h2>
             <p class="text-lg mb-10 text-red-100">En caso de una emergencia real dentro o en las inmediaciones del CUGDL, utiliza los siguientes botones para llamar de inmediato.</p>
             
             <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="tel:911" class="bg-white text-udg-red hover:bg-gray-100 px-8 py-4 rounded-xl font-black text-2xl transition shadow-xl flex items-center justify-center gap-3">
-                    <i class="fa-solid fa-phone"></i> 911 <span class="text-sm font-normal block ml-2 border-l pl-2 border-gray-300">Policía / Médica</span>
+                <a href="tel:911" class="bg-white text-udg-red hover:bg-gray-100 px-8 py-4 rounded-xl font-black text-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-3 group">
+                    <i class="fa-solid fa-phone group-hover:animate-bounce"></i> 911 <span class="text-sm font-normal block ml-2 border-l pl-2 border-gray-300">Policía / Médica</span>
                 </a>
-                <a href="#" onclick="alert('Funcionalidad de llamada a Seguridad CUGDL activa. Número de ejemplo.'); return false;" class="bg-black text-white hover:bg-gray-900 px-8 py-4 rounded-xl font-bold text-xl transition shadow-xl flex items-center justify-center gap-3 border border-gray-700">
-                    <i class="fa-solid fa-walkie-talkie"></i> Seguridad CUGDL
+                <a href="#" id="seguridad-cugdl-btn" class="bg-black text-white hover:bg-gray-900 px-8 py-4 rounded-xl font-bold text-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl active:scale-95 flex items-center justify-center gap-3 border border-gray-700 group">
+                    <i class="fa-solid fa-walkie-talkie group-hover:text-gray-400 transition-colors"></i> Seguridad CUGDL
                 </a>
             </div>
             <p class="mt-8 text-sm text-red-200">
@@ -281,12 +405,12 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-udg-blue text-gray-300 py-12 border-t-4 border-udg-gold">
+    <footer class="bg-udg-blue text-gray-300 py-12 border-t-4 border-udg-accent">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center gap-3 mb-4">
-                        <i class="fa-solid fa-shield-halved text-udg-gold text-2xl"></i>
+                        <i class="fa-solid fa-shield-halved text-udg-accent text-2xl"></i>
                         <span class="font-bold text-xl text-white tracking-wider">CUGDL SEGURO</span>
                     </div>
                     <p class="text-sm mb-4">
@@ -296,18 +420,18 @@
                 <div>
                     <h4 class="text-white font-bold mb-4">Enlaces Rápidos</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#inicio" class="hover:text-udg-gold transition">Inicio</a></li>
-                        <li><a href="#proyecto" class="hover:text-udg-gold transition">Sobre el Proyecto</a></li>
-                        <li><a href="#tecnologia" class="hover:text-udg-gold transition">Innovación</a></li>
-                        <li><a href="#recomendaciones" class="hover:text-udg-gold transition">Tips de Seguridad</a></li>
+                        <li><a href="#inicio" class="hover:text-white transition">Inicio</a></li>
+                        <li><a href="#proyecto" class="hover:text-white transition">Sobre el Proyecto</a></li>
+                        <li><a href="#tecnologia" class="hover:text-white transition">Innovación</a></li>
+                        <li><a href="#recomendaciones" class="hover:text-white transition">Tips de Seguridad</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="text-white font-bold mb-4">Centro Universitario</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><i class="fa-solid fa-location-dot w-5 text-udg-gold"></i> CUGDL, Guadalajara, Jalisco</li>
-                        <li><i class="fa-solid fa-envelope w-5 text-udg-gold"></i> innovacion@cugdl.udg.mx</li>
-                        <li><i class="fa-solid fa-graduation-cap w-5 text-udg-gold"></i> Universidad de Guadalajara</li>
+                        <li><i class="fa-solid fa-location-dot w-5 text-udg-accent"></i> CUGDL, Guadalajara, Jalisco</li>
+                        <li><i class="fa-solid fa-envelope w-5 text-udg-accent"></i> innovacion@cugdl.udg.mx</li>
+                        <li><i class="fa-solid fa-graduation-cap w-5 text-udg-accent"></i> Universidad de Guadalajara</li>
                     </ul>
                 </div>
             </div>
@@ -320,8 +444,90 @@
         </div>
     </footer>
 
+    <!-- Botón de Pánico Flotante -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-4 group">
+        <span class="bg-gray-900 text-white text-sm font-bold px-4 py-2 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg pointer-events-none whitespace-nowrap">
+            Solicitar Ayuda Inmediata
+        </span>
+        <button id="panic-fab" class="relative bg-udg-red text-white w-16 h-16 rounded-full shadow-[0_0_20px_rgba(220,38,38,0.8)] flex items-center justify-center hover:scale-110 hover:bg-red-700 transition-all duration-300">
+            <!-- Pulso animado para mayor visibilidad -->
+            <span class="absolute inset-0 rounded-full border-4 border-udg-red animate-ping opacity-75"></span>
+            <i class="fa-solid fa-bell text-2xl group-hover:animate-ringing relative z-10"></i>
+        </button>
+    </div>
+
+    <!-- Chat Modal de Emergencia -->
+    <div id="chat-modal" class="hidden fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+        <div class="bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden flex flex-col transform scale-95 transition-transform duration-300" id="chat-box">
+            <!-- Header -->
+            <div class="bg-udg-blue text-white p-4 flex justify-between items-center border-b-4 border-udg-red">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <i class="fa-solid fa-user-shield text-2xl text-udg-accent"></i>
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-udg-blue rounded-full"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-bold">Centro de Mando</h3>
+                        <p class="text-xs text-gray-300">Conexión Segura CUGDL</p>
+                    </div>
+                </div>
+                <button id="close-chat" class="text-gray-400 hover:text-white transition-colors p-1 focus:outline-none">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <!-- Body -->
+            <div id="chat-messages" class="p-4 h-80 overflow-y-auto flex flex-col gap-3 bg-gray-50">
+                <!-- Los mensajes se insertarán aquí -->
+            </div>
+            <!-- Footer/Input -->
+            <div class="p-3 bg-white border-t border-gray-200">
+                <form id="chat-form" class="flex gap-2">
+                    <input type="text" id="chat-input" class="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:border-udg-red focus:ring-1 focus:ring-udg-red text-sm transition-shadow" placeholder="Describe tu situación..." autocomplete="off" disabled>
+                    <button type="submit" id="chat-submit" class="bg-udg-red text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-red-700 transition disabled:opacity-50 disabled:hover:bg-udg-red focus:outline-none" disabled>
+                        <i class="fa-solid fa-paper-plane text-sm"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script>
+        // Efecto Navbar al hacer Scroll
+        const navbar = document.getElementById('navbar');
+        const navContainer = document.getElementById('navbar-container');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.classList.add('bg-opacity-95', 'backdrop-blur-sm');
+                navContainer.classList.remove('h-20');
+                navContainer.classList.add('h-16');
+            } else {
+                navbar.classList.remove('bg-opacity-95', 'backdrop-blur-sm');
+                navContainer.classList.remove('h-16');
+                navContainer.classList.add('h-20');
+            }
+        });
+
+        // Intersection Observer para Animaciones "Reveal"
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Dejar de observar una vez animado
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        });
+        
+        revealElements.forEach(el => revealObserver.observe(el));
+
         // Mobile Menu Toggle
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -341,11 +547,177 @@
         // Smooth scrolling for anchor links (fallback para navegadores que no soportan scroll-behavior)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
+                // Prevenir comportamiento si es el boton de seguridad
+                if(this.id === 'seguridad-cugdl-btn') return;
+                
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if(target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
+        });
+
+        // Lógica del Botón de Pánico y Chat
+        const panicFab = document.getElementById('panic-fab');
+        const seguridadCugdlBtn = document.getElementById('seguridad-cugdl-btn');
+        const chatModal = document.getElementById('chat-modal');
+        const chatBox = document.getElementById('chat-box');
+        const closeChat = document.getElementById('close-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const chatSubmit = document.getElementById('chat-submit');
+
+        let chatActive = false;
+        let chatStep = 0; // Para controlar la conversación
+
+        function addMessage(text, sender) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `max-w-[85%] rounded-2xl px-4 py-2 text-sm ${sender === 'user' ? 'bg-udg-red text-white self-end rounded-tr-sm shadow-md' : 'bg-white border border-gray-200 text-gray-800 self-start rounded-tl-sm shadow-sm'}`;
+            msgDiv.innerHTML = text;
+            
+            const timeDiv = document.createElement('div');
+            const now = new Date();
+            timeDiv.className = `text-[10px] mt-1 ${sender === 'user' ? 'text-red-200 text-right' : 'text-gray-400'}`;
+            timeDiv.innerText = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            msgDiv.appendChild(timeDiv);
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const id = 'typing-' + Date.now();
+            const msgDiv = document.createElement('div');
+            msgDiv.id = id;
+            msgDiv.className = `bg-white border border-gray-200 text-gray-800 self-start rounded-2xl rounded-tl-sm px-4 py-3 text-sm flex gap-1 items-center shadow-sm`;
+            msgDiv.innerHTML = `<span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce"></span><span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-100"></span><span class="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce delay-200"></span>`;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return id;
+        }
+
+        function removeTypingIndicator(id) {
+            const el = document.getElementById(id);
+            if(el) el.remove();
+        }
+
+        function openChatModal() {
+            chatModal.classList.remove('hidden');
+            // Trigger reflow para animación CSS
+            void chatModal.offsetWidth;
+            chatModal.classList.remove('opacity-0');
+            chatBox.classList.remove('scale-95');
+            
+            if(!chatActive) {
+                chatActive = true;
+                chatStep = 0;
+                chatMessages.innerHTML = '';
+                chatInput.placeholder = "Describe tu situación...";
+                
+                // Mensaje automático inicial del usuario simulando el toque de pánico
+                addMessage('🚨 <b>ALERTA DE PÁNICO ENVIADA</b><br>Geolocalización compartida.', 'user');
+                
+                // Simulación de respuesta inicial de la autoridad
+                const typingId = addTypingIndicator();
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Alerta recibida en el Centro de Mando. Unidades de seguridad han sido notificadas. ¿Cuál es tu ubicación exacta dentro del plantel? (Ej. Edificio A, Biblioteca, Cafetería)', 'system');
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                    chatInput.focus();
+                }, 1500);
+            }
+        }
+
+        // Asignar apertura al botón flotante y al botón del footer
+        panicFab.addEventListener('click', openChatModal);
+        seguridadCugdlBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openChatModal();
+        });
+
+        closeChat.addEventListener('click', () => {
+            chatModal.classList.add('opacity-0');
+            chatBox.classList.add('scale-95');
+            setTimeout(() => chatModal.classList.add('hidden'), 300);
+        });
+
+        // Simulación de una conversación continua por pasos
+        chatForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const text = chatInput.value.trim();
+            if(!text) return;
+            
+            addMessage(text, 'user');
+            chatInput.value = '';
+            chatInput.disabled = true;
+            chatSubmit.disabled = true;
+            
+            const typingId = addTypingIndicator();
+
+            if (chatStep === 0) {
+                // Paso 1: Preguntar la situación después de recibir la ubicación
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Ubicación confirmada. Elementos dirigiéndose a ese punto. ¿Qué problema está ocurriendo exactamente? (Ej. asalto, emergencia médica, persona sospechosa)', 'system');
+                    chatStep++;
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                    chatInput.focus();
+                }, 2000);
+            } else if (chatStep === 1) {
+                // Paso 2: Preguntar por heridos o gravedad
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Entendido. ¿Hay alguien herido o en peligro inminente? Necesitamos saber si enviamos paramédicos junto con seguridad.', 'system');
+                    chatStep++;
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                    chatInput.focus();
+                }, 2500);
+            } else if (chatStep === 2) {
+                // Paso 3: Pedir descripción
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Copiado. Por favor, si es seguro hacerlo, describe a los involucrados (vestimenta, características) o danos más detalles del entorno.', 'system');
+                    chatStep++;
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                    chatInput.focus();
+                }, 2200);
+            } else if (chatStep === 3) {
+                // Paso 4: Confirmación de seguridad
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Información transmitida a las unidades en campo. Están a menos de 1 minuto de tu posición. ¿Puedes seguir comunicándote de forma segura o necesitas silenciar el dispositivo?', 'system');
+                    chatStep++;
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                    chatInput.focus();
+                }, 2800);
+            } else if (chatStep === 4) {
+                // Paso 5: Cierre y recomendación de resguardo
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('De acuerdo. Mantente oculto y en calma si la situación lo amerita. No cierres este chat, los oficiales de seguridad te contactarán visualmente en breves momentos.', 'system');
+                    chatStep++;
+                    chatInput.placeholder = "Escribe solo si es estrictamente necesario...";
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                }, 2500);
+            } else {
+                // Paso 6+: Respuestas genéricas si siguen enviando mensajes
+                setTimeout(() => {
+                    removeTypingIndicator(typingId);
+                    addMessage('Seguimos en línea monitoreando tu situación. Unidades acercándose...', 'system');
+                    chatInput.disabled = false;
+                    chatSubmit.disabled = false;
+                }, 1500);
+            }
         });
     </script>
 </body>
